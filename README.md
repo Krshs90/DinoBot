@@ -1,83 +1,45 @@
-# DinoBot Neural Engine
+# DinoBot V2: Browser-Native Neuroevolution
 
-*Made by Krshs90, Bug fixed by Google Antigravity, ReadMe by Gemini 3.1 Pro*
+*Made by Krshs90*
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=for-the-badge&logo=python)](#)
-[![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](#)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.103-009688?style=for-the-badge&logo=fastapi)](#)
-[![Selenium](https://img.shields.io/badge/Selenium-4.12-43B02A?style=for-the-badge&logo=selenium)](#)
-[![NEAT](https://img.shields.io/badge/NEAT-Python-orange?style=for-the-badge)](#)
+[![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)](#)
+[![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](#)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](#)
+[![Neuroevolution](https://img.shields.io/badge/Neuroevolution-AI-blueviolet?style=for-the-badge)](#)
 
 ## Overview
 
-DinoBot Neural Engine is a high-performance, multithreaded AI training platform designed to autonomously master the Chrome Dinosaur game. It leverages the NEAT (NeuroEvolution of Augmenting Topologies) algorithm to evolve neural networks over successive generations.
+Welcome to **DinoBot V2**! This is a completely rewritten, entirely browser-based Artificial Intelligence designed to master the classic Chrome Dinosaur game. 
 
-Unlike traditional single-threaded automation scripts, this project features a modern full-stack architecture:
-* **Headless Parallel Evaluation**: Simulates multiple game instances concurrently using headless Chrome browsers.
-* **WebSocket Telemetry**: Streams real-time training metrics, engine logs, and base64 video frames from the hidden browsers to the frontend.
-* **React Dashboard**: Provides a professional, minimalist control center to monitor and manipulate the training process on the fly.
+Transitioning from the bulky Python/Selenium backend of V1, this new version runs a pure HTML5 Canvas headless simulation directly in your browser. By utilizing a **Genetic Algorithm** and **Neural Networks** written from scratch in vanilla JavaScript, it rapidly learns to play the game without requiring any backend servers, WebDriver setups, or Python dependencies.
 
-![Live Simulation Previews](dashboard.png)
+![DinoBot V2 Preview](dashboard.png)
 
 ## Architecture
 
-* **Backend Engine (`backend/engine.py`)**: Orchestrates the NEAT population, manages a persistent thread pool of headless Selenium workers, and intercepts internal game states via DOM injection to bypass standard visual processing overhead.
-* **API Layer (`backend/main.py`)**: A FastAPI server that exposes REST endpoints for simulation control (Play/Pause/FPS) and a persistent WebSocket connection for high-frequency telemetry streaming.
-* **Frontend Dashboard (`frontend/`)**: A Vite/React application styled with Tailwind CSS, offering a terminal-style log viewer, live metrics, and a 2x2 grid preview of the hidden evaluation threads.
+* **`index.html` & `style.css`**: Provides a beautiful, glassmorphism-styled dashboard UI and the rendering canvas. Includes a "Streamer Mode" for distraction-free recording.
+* **`game.js`**: A custom headless physics engine mimicking the exact mechanics of the original T-Rex Runner (gravity, jumping, ducking, obstacles).
+* **`agent.js`**: The AI Brain. Implements a Feedforward Neural Network optimized via a Genetic Algorithm (Neuroevolution). It tracks 5 core inputs (distance to obstacle, width, type, speed, and altitude) to make split-second decisions.
+* **`main.js`**: The central orchestrator that links the AI, the physics engine, and the canvas renderer, driving the high-speed training loop.
 
 ## Features
 
-* **Parallel Training**: Evaluates 4 genomes simultaneously, significantly accelerating the evolutionary process.
-* **Zero-Interference Execution**: Runs entirely in the background (`--headless=new`). The host operating system's focus and display are unaffected.
-* **Live Configuration**: Adjust the preview capture framerate dynamically without interrupting the training loop.
-* **State Management**: Robust pause/resume functionality that accurately halts both the neural network evolution and the internal game clocks.
-* **Automated Persistence**: Automatically halts and saves the optimal weights (`best_genome.pkl`) to disk once the target fitness threshold (100,000) is achieved.
+* **Zero Setup**: No Python, no Selenium, no `npm install`. Just open `index.html` in your browser!
+* **Blazing Fast Training**: Evaluates populations of up to 100 dinosaurs simultaneously at massive time-scales.
+* **Neuroevolution**: Employs genetic selection and mutation on neural network weights to discover the optimal playstyle within just a few generations.
+* **Streamer Mode**: A clean, single-dino view that hides the background training UI for recording satisfying, perfect gameplay.
+* **Local Persistence**: Automatically saves the "Alpha" brain's neural network parameters to your browser's Local Storage.
 
-## Installation and Execution
+## How to Play / Train
 
-The platform is designed for turnkey deployment. A single batch script manages dependency resolution and launches both the backend and frontend servers.
-
-### Prerequisites
-* Python 3.8+
-* Node.js (v18+)
-* Google Chrome installed locally
-
-### Quick Start
-
-1. Clone the repository.
-2. Execute the bootstrap script:
-   ```cmd
-   run.bat
-   ```
-3. The script will automatically:
-   * Install Python requirements (`requirements.txt`).
-   * Install Node.js packages (`npm install`).
-   * Start the FastAPI engine on port 8000.
-   * Start the Vite development server.
-   * Open `http://localhost:5173` in your default browser.
-
-### Manual Start
-If you prefer to start the services manually:
-
-**Backend:**
-```bash
-pip install -r requirements.txt
-cd backend
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
-**Frontend:**
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-## Configuration
-
-The neural network topology, mutation rates, and population size are governed by `config-feedforward.txt`. 
-
-To modify the target victory condition, adjust the `fitness_threshold` parameter within the configuration file.
+1. Open `index.html` in your browser.
+2. The AI will immediately begin generating random brains and training.
+3. Use the floating UI panel to:
+   * **Adjust Speed**: Speed up the simulation to train faster or slow it down to 1x to watch the Alpha.
+   * **Adjust Population**: Spawn up to 100 simultaneous instances for wider genetic diversity.
+   * **Show Ghosts**: See all the concurrent "failed" runs fading out as the Alpha succeeds.
+   * **Save Brain**: Persist the best network to your browser.
+4. Click **Streamer Mode** to hide the UI and focus on the flawless Alpha dino. Press `ESC` to exit.
 
 ## License
 

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DinoBot - Q-Learning AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <div id="panel" class="panel">
+        <div id="panelHeader" class="panel-header">
+            <span class="panel-title">Dino Brain Stats</span>
+            <div class="panel-header-btns">
+                <button id="minimizeBtn" class="panel-btn" title="Minimize">—</button>
+            </div>
+        </div>
+
+        <div id="panelBody" class="panel-body">
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <span class="stat-label">Generation</span>
+                    <span class="stat-value" id="genCount">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Best Score</span>
+                    <span class="stat-value" id="bestScore">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Alpha Score</span>
+                    <span class="stat-value" id="alphaScore">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Alive</span>
+                    <span class="stat-value" id="aliveCount">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Mutation</span>
+                    <span class="stat-value" id="epsilonVal">10%</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">NN Params</span>
+                    <span class="stat-value" id="qStates">0</span>
+                </div>
+            </div>
+
+            <div class="controls">
+                <label class="control-label">Training Speed</label>
+                <div class="speed-buttons">
+                    <button class="speed-btn active" data-speed="1">1x</button>
+                    <button class="speed-btn" data-speed="5">5x</button>
+                    <button class="speed-btn" data-speed="20">20x</button>
+                    <button class="speed-btn" data-speed="0">MAX</button>
+                </div>
+
+                <label class="control-label">Population</label>
+                <div class="speed-buttons">
+                    <button class="pop-btn" data-pop="1">1</button>
+                    <button class="pop-btn" data-pop="10">10</button>
+                    <button class="pop-btn active" data-pop="50">50</button>
+                    <button class="pop-btn" data-pop="200">200</button>
+                </div>
+
+                <div class="toggle-row">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="showGhosts" checked>
+                        Show Learning Dummies
+                    </label>
+                </div>
+                
+                <div class="btn-row">
+                    <button id="resetBtn" class="danger-btn">Reset Brain</button>
+                    <button id="saveBtn" class="save-btn">Save Brain</button>
+                </div>
+                <div class="btn-row" style="margin-top:8px;">
+                    <button id="exportBtn" class="save-btn">Export Brain</button>
+                    <button id="importBtn" class="save-btn">Import Brain</button>
+                    <input type="file" id="importFile" accept=".json" style="display:none">
+                </div>
+                <div class="btn-row" style="margin-top:8px;">
+                    <button id="streamerBtn" class="save-btn streamer-btn">📺 Enter Streamer Mode</button>
+                </div>
+            </div>
+
+            <div id="scoreHistory">
+                <label class="control-label">Score History (last 50 gens)</label>
+                <canvas id="chartCanvas" width="310" height="80"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="agent.js?v=1"></script>
+    <script src="game.js?v=1"></script>
+    <script src="main.js?v=1"></script>
+</body>
+</html>
